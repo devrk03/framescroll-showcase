@@ -1,0 +1,61 @@
+/* src/styles/Character.module.css */
+.characterSection {
+  position: relative;
+  min-height: 100vh;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 2rem;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.visible {
+  opacity: 1;
+}
+
+.content {
+  max-width: 800px;
+  text-align: center;
+  padding: 3rem;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.title {
+  font-size: 4rem;
+  margin-bottom: 2rem;
+  color: var(--accent-color);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.description {
+  font-size: 1.5rem;
+  line-height: 1.8;
+  color: var(--text-light);
+}
+
+@media screen and (max-width: 768px) {
+  .characterSection {
+    padding: 3rem 1.5rem;
+  }
+  
+  .content {
+    padding: 2rem;
+  }
+  
+  .title {
+    font-size: 2.5rem;
+  }
+  
+  .description {
+    font-size: 1.2rem;
+  }
+}
