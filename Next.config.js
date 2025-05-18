@@ -1,10 +1,8 @@
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
-  images: {
-    unoptimized: true
-  },
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/scroll-native' : '',
-  basePath: process.env.NODE_ENV === 'production' ? '/scroll-native' : '',
-}
+  reactStrictMode: true, // Good practice
+  // images: { unoptimized: true, etc } - Omit this to use default optimization
+  // assetPrefix and basePath - Omit these for root domain deployments
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
