@@ -1,6 +1,7 @@
 import './../styles/globals.css' // Import global styles
 import type { Metadata } from 'next'
 import { Inter, Crimson_Text } from 'next/font/google' // Import Google Fonts
+import ClientLayout from "@/components/ClientLayout";
 import { ImageModalProvider } from '@/context/ImageModalContext'
 import ImageModal from '@/components/ImageModal'
 import Navbar from '@/components/Navbar'
