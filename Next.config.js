@@ -3,8 +3,8 @@ const nextConfig = {
   images: {
     unoptimized: true
   },
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/parallaxvision' : '',
-  basePath: process.env.NODE_ENV === 'production' ? '/parallaxvision' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/scroll-native' : '',
+  basePath: process.env.NODE_ENV === 'production' ? '/scroll-native' : '',
 }
 
 module.exports = nextConfig
