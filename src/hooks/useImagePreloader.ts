@@ -1,37 +1,51 @@
-// src/hooks/useImagePreloader.ts
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-export const useImagePreloader = (imageList: string[]) => {
-  const [imagesPreloaded, setImagesPreloaded] = useState<boolean>(false);
+const useImagePreloader = (imageUrls: string[]) => {
+  const [preloadComplete, setPreloadComplete] = useState(false);
 
   useEffect(() => {
-    let isMounted = true;
-    const preloadImages = async () => {
-      const promises = imageList.map((src) => {
-        return new Promise((resolve, reject) => {
-          const img = new Image();
-          img.src = src;
-          img.onload = resolve;
-          img.onerror = reject;
-        });
-      });
+    let loadedCount = 0;
+    const totalToLoad = imageUrls.length;
 
-      try {
-        await Promise.all(promises);
-        if (isMounted) {
-          setImagesPreloaded(true);
-        }
-      } catch (error) {
-        console.error('Failed to preload images', error);
+    if (totalToLoad === 0) {
+      setPreloadComplete(true);
+      return;
+    }
+
+    const handleLoad = () => {
+      loadedCount += 1;
+      if (loadedCount === totalToLoad) {
+        setPreloadComplete(true);
       }
     };
 
-    preloadImages();
-    
-    return () => {
-      isMounted = false;
+    const handleError = () => {
+       // Handle potential errors if needed, though simpler to just log or ignore for preloading effect
+       loadedCount += 1; // Still count it, even if failed, to eventually finish
+       if (loadedCount === totalToLoad) {
+        setPreloadComplete(true);
+      }
     };
-  }, [imageList]);
 
-  return { imagesPreloaded };
+    imageUrls.forEach((url) => {
+      if (url) {
+        const img = new Image();
+        img.onload = handleLoad;
+        img.onerror = handleError;
+        img.src = url;
+      } else {
+          loadedCount += 1; // Count missing/null urls
+          if (loadedCount === totalToLoad) {
+            setPreloadComplete(true);
+          }
+      }
+    });
+
+    // Cleanup function is not strictly necessary for image loading itself
+    // as images are loaded into browser cache, but good practice if using other resources
+  }, [imageUrls]);
+
+  return preloadComplete;
 };
+
+export default useImagePreloader;
